@@ -5,9 +5,9 @@ Comics](http://www.phdcomics.com/comics/archive.php?comicid=1531).
 
 How might you solve this problem?
 
-1. Maybe you are using sequentially numbered directories
-2. Maybe you are using track-changes
-3. Maybe you are using Google Docs
+1. Maybe you are using sequentially numbered directories.
+2. Maybe you are using track-changes.
+3. Maybe you are using Google Docs.
 
 ## What is the problem with each of these approaches?
 
@@ -54,10 +54,9 @@ instead
 My name is Juan Shishido, and I'm a graduate student at the School of
 Information.
 
-* I won't be able to answer all your questions
-* No one will
-* But especially me
-* Because programming is one endless Google Search
+* I won't be able to answer all your questions.
+* No one will.
+* Because programming is one endless Google Search.
 
 At D-Lab, we call this last point "Rochelle's Law", after Rochelle Terman,
 who once pronounced that the only difference between a clueless user and a tech
