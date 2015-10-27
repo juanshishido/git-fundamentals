@@ -56,7 +56,7 @@ git config --global core.editor nano
 Make sure everything was entered correctly by typing `git config --list`
 
 ```
-user.name=<username>
+user.name=<name>
 user.email=<email>
 core.editor=<editor>
 ```
