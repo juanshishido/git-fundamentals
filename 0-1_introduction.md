@@ -52,11 +52,11 @@ instead
 ## About me
 
 My name is Juan Shishido, and I'm a graduate student at the School of
-Information
+Information.
 
-* I won't be able to answer all your questions.
-* No one will.
-* But especially me.
+* I won't be able to answer all your questions
+* No one will
+* But especially me
 * Because programming is one endless Google Search
 
 At D-Lab, we call this last point "Rochelle's Law", after Rochelle Terman,
