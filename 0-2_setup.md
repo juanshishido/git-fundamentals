@@ -1,66 +1,70 @@
----
-title: Git FUN!damentals
-subtitle: Installation and Setup
-minutes:
----
+# Setup
 
 ## On BCE
 
-* You've already got it!
-* But, just for fun:
-  * `sudo apt-get install git`
-  * you should see:
+* You've already got it
+* But, just for fun: `sudo apt-get install git`
+* You should see
 
-~~~{.output}
+```
 Reading package lists... done
 Building dependency tree
 Reading state information... done
 git is already the newest version
-~~~
+```
 
-* On a debian system (like BCE), you install via `apt-get install`
+* On a Debian system (like BCE), you install via `apt-get install`
 * On a RHEL system, you install via `yumm install`
 
-## On OSX
+## On OS X
 
-* your system *might* have git installed already
-  * you can test this by opening a terminal and typing `git`
-* if not, install xcode from the app store
+* Your system *might* already have Git installed
+    * You can test this by opening a terminal and typing `git`
+* If not, install Xcode from the App Store or with the following at the command
+line: `xcode-select --install`
+    * This installs the command line tools, a much smaller download
 
 ## On Windows
 
-* you should already have this from when you grabbed git and git-bash during the last lesson
+* You can try [Git for Windows](https://git-for-windows.github.io/)
 
-# Configuring git to work with you
+## Other
 
-## You need to tell git who you are
+* You can also download from [git-scm](https://git-scm.com/download/)
 
-We do this by setting a couple of options in a file found in your home directory
+# Configuring Git to work with you
 
-~~~{.input}
+## You need to tell Git who you are
+
+We do this by setting a couple of options in a file found in your home
+directory.
+
+```
 git config --global user.name "Firstname Lastname"
 git config --global user.email username@company.extension
-~~~
+```
 
-Your name and email address is included in every change that you make, so it's easy to keep track of who did what
+Your name and email address is included in every change that you make, so it's
+easy to keep track of who did what.
 
-Also, unless you are a vimwizard, I would recommend chanigng your default editor to nano
+You might also want to change the default editor used by Git. For GNU nano
 
-~~~{.input}
+```
 git config --global core.editor nano
-~~~
+```
 
 Make sure everything was entered correctly by typing `git config --list`
 
-~~~{.output}
-user.name=Dillon Niederhut
-user.email=dillon.niederhut@gmail.com
-core.editor=nano
-~~~
+```
+user.name=<username>
+user.email=<email>
+core.editor=<editor>
+```
 
 ## Acknowledgments
 
-This learning module borrows and adapts materials from the following organizations and individuals. Thank you!
+This learning module borrows and adapts materials from the following
+organizations and individuals. Thank you!
 
 [Software Carpentry](https://github.com/swcarpentry/git-novice)
 [Dav Clark](https://github.com/davclark/git-fundamentals)
