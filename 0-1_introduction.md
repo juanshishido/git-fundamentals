@@ -54,9 +54,9 @@ instead
 My name is Juan Shishido, and I'm a graduate student at the School of
 Information.
 
-* I won't be able to answer all your questions.
-* No one will.
-* Because programming is one endless Google Search.
+* I won't be able to answer all your questions
+* No one will
+* Because programming is one endless Google Search
 
 At D-Lab, we call this last point "Rochelle's Law", after Rochelle Terman,
 who once pronounced that the only difference between a clueless user and a tech
