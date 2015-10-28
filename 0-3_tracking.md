@@ -271,6 +271,14 @@ Changes to be committed:
 Git ignores the log file&mdash;it doesn't even list it. Notice that `-A` also
 added `README.md`.
 
+If we want to remove that file
+
+```
+$ git reset HEAD README.md
+```
+
+You can `git status` to confirm that `README.md` has been unstaged.
+
 ## Acknowledgments
 
 This learning module borrows and adapts materials from the following
