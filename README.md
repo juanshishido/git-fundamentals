@@ -30,10 +30,10 @@ A starting point for discovering the wonderful world of Git and GitHub.
 * [Basic commands cheat sheet(s)](http://git-scm.com/docs) (Note the links to
   other cheat sheets!)
 * [Gamified git](http://pcottle.github.io/learnGitBranching/)
-* GitHub sponsors [this](http://try.github.io/).
-* Where does "help" go from GitHub? [Here](https://help.github.com/).
+* GitHub sponsors [this](http://try.github.io/)
+* Where does "help" go from GitHub? [Here](https://help.github.com/)
 * [Linux commands cheat sheet](http://www.pixelbeat.org/cmdline.html) (also
-  mostly works for OS X command line).
+  mostly works for OS X command line)
 * [git - the simple guide](http://rogerdudler.github.io/git-guide/)
 * [The visual git guide](http://marklodato.github.io/visual-git-guide/index-en.html)
 
@@ -45,7 +45,7 @@ A starting point for discovering the wonderful world of Git and GitHub.
   notebook](https://github.com/fperez/reprosw/blob/master/Version%20Control.ipynb)
   (of course!) from @fperez
 * [Lots of exposition](http://matthew-brett.github.io/pydagogue) on Git + other
-  mostly Python stuff and [python scripts for a standardized git
+  mostly Python stuff and [Python scripts for a standardized Git
   workflow](https://github.com/matthew-brett/gitwash) from @matthew-brett
 * [Tons of R code to access public
   APIs](http://ropensci.org/packages/index.html) from @karthik and the
