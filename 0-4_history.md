@@ -1,107 +1,97 @@
----
-title: Git FUN!damentals
-subtitle: History and reverting changes
-minutes:
----
+# Undoing changes
 
-## Git history
+## Log
 
-Git takes care of all these things for you behind the scenes (even branching and merging, which we'll talk about later), but sometimes you need to know what changed and when
+Git takes care of all these things for you behind the scenes (even branching
+and merging, which we'll talk about later), but sometimes you need to know when
+and by whom changes were made. To see the commit logs
 
-~~~{.input}
-git log
-~~~
+```
+$ git log
+commit f1446abe740b2872dc384eb656d300622dd2220f
+Author: juanshishido <juanshishido@cal.berkeley.edu>
+Date:   Tue Oct 27 22:11:27 2015 -0700
 
-This should give you an output that looks something like this:
+    Added D-Lab's location
 
-~~~{.output}
-commit a8874aa9d0266a2b0df354b308cfe8bd69ab1114
-Author: Dillon Niederhut <dillon.niederhut@gmail.com>
-Date:   Fri Aug 14 16:31:27 2015 -0700
+commit 7dab4278f3bed2e14860b1bd4676fe5225d58b2a
+Author: juanshishido <juanshishido@cal.berkeley.edu>
+Date:   Tue Oct 27 21:45:13 2015 -0700
 
-    testing gitignore
+    D-Lab motto
+```
 
-commit dffe554d91c1a9b8924e0fbb4046b7d99beb8edf
-Author: Dillon Niederhut <dillon.niederhut@gmail.com>
-Date:   Fri Aug 14 16:08:03 2015 -0700
+This shows the entire history of this repository in reverse chronological order.
 
-    something else
+To see the the diffs on the files you've committed, you can use `git log -p`.
+However, because our commit messages give us a pretty good idea of what we did,
+we don't necessarily need to use the `-p` flag.
 
-commit 07f5ba50c64f25e047bbf3105c1d05b72dcadba2
-Author: Dillon Niederhut <dillon.niederhut@gmail.com>
-Date:   Fri Aug 14 15:24:36 2015 -0700
+## Checkout
 
-    README added
+Let's imagine that we changed our minds about having the D-Lab's location in
+`dlab.txt`. We could make the changes manually, but Git provides a better way
+for us to revert to a previous state.
 
-~~~
+The `git checkout` command lets us either return the *entire* directory to a
+previous state or access a previous version of a particular file. (The checkout
+command is also useful for switching branches.)
 
-This shows the entire history of this repository in reverse chronological order
+In our example, because we've only committed a single file, these will
+essentially be the same operation.
 
-## Finding bugs
+If you recall, we have several files (e.g., `magic.py` and `script.R`) in the
+staging area. Let's commit those changes before we use the checkout command and
+look at the log.
 
-Now imagine that someone has issued a bug report for your README file being inaccurate
+```
+$ git commit -m 'Adding empty citation, license, Python, and R files'
+$ git log
+commit e63d4f2e2366088f34b671e6e0d99e0105ffcdfe
+Author: juanshishido <juanshishido@cal.berkeley.edu>
+Date:   Tue Oct 27 23:27:50 2015 -0700
 
-> You could rewrite it, but that is *WET* and *WET* is *BAD*
+    Adding empty citation, license, Python, and R files
 
-Or
+commit f1446abe740b2872dc384eb656d300622dd2220f
+Author: juanshishido <juanshishido@cal.berkeley.edu>
+Date:   Tue Oct 27 22:11:27 2015 -0700
 
-> You could find when the accurate README was overwritten and reverting
+    Added D-Lab's location
 
-Have you ever accidentally destroyed something good? Git is the fix for that!
+commit 7dab4278f3bed2e14860b1bd4676fe5225d58b2a
+Author: juanshishido <juanshishido@cal.berkeley.edu>
+Date:   Tue Oct 27 21:45:13 2015 -0700
 
-To find when the change occurred, we'll look at the file changes within `log`
+    D-Lab motto
+```
 
-~~~{.input}
-git log -p
-~~~
+Now, we can either checkout a commit or a particular file. Because we're only
+interested in reverting `dlab.txt`, let's checkout that file. Before we do,
+let's print the file's contents. After checking it out, let's print the file
+contents again.
 
-~~~{.output}
-commit dffe554d91c1a9b8924e0fbb4046b7d99beb8edf
-Author: Dillon Niederhut <dillon.niederhut@gmail.com>
-Date:   Fri Aug 14 16:08:03 2015 -0700
+```
+$ cat dlab.txt
+Data-intensive social science for all.
+350 Barrows Hall
+$ git checkout 7dab4278f3bed2e14860b1bd4676fe5225d58b2a dlab.txt
+$ cat dlab.txt
+Data-intensive social science for all.
+```
 
-    something else
+When checking out a file, `git checkout` takes the commit hash and file name as
+arguments. The long set of alpanumeric characters is the hash and its the way
+that Git references and identifies commits. When you do this on your own
+computer, the hash will be different. I've provided the entire 40-character
+hash. In reality, all Git needs is enough characters to uniquely identify the
+commit.
 
-diff --git a/README b/README
-index e69de29..299d09f 100644
---- a/README
-+++ b/README
-@@ -1 +1 @@
--Temporary git repository
-+Something else
+Notice that the second time we call `cat dlab.txt`, the "350 Barrows Hall" part
+is gone. This is the only file that's been reverted to a previous state and all
+of our other files are still there.
 
-commit 07f5ba50c64f25e047bbf3105c1d05b72dcadba2
-Author: Dillon Niederhut <dillon.niederhut@gmail.com>
-Date:   Fri Aug 14 15:24:36 2015 -0700
-
-    README added
-
-diff --git a/README b/README
-new file mode 100644
-index 0000000..e69de29
-~~~
-
-So we can see that the file was fine before commit `dffe554`, and that it was ruined by some schmuck named `Dillon Niederhut`
-
-## Recovering old files
-
-To get a file back to its old state, call checkout with the commit hash and the file name
-
->When you do this on your own computers, keep in mind the hash will be different
-
-~~~{.input}
-git checkout 07f5ba5 README
-~~~
-
-and now if you look at the README file, you'll see it (and it alone!) has gone back to the way it was before the bug
-
-~~~{.output}
-Temporary git repository
-~~~
-
-*and* we haven't lost any of the other files
-
-~~~{.output}
-CITATION	README		script.R
-LICENSE		magic.py	test.log
-~~~
+```
+$ ls
+CITATION  LICENSE   README.md dlab.txt  magic.py  script.R  test.log
+```
