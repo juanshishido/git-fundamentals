@@ -54,7 +54,7 @@ that repository.
 
 **Enter the OctoCat**
 
-[Here's lookin' at you, cat](https://octodex.github.com/images/privateinvestocat.jpg)
+![Here's lookin' at you, cat](https://octodex.github.com/images/privateinvestocat.jpg)
 
 ### Your first GitHub account
 
