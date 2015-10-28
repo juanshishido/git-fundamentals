@@ -39,7 +39,7 @@ line: `xcode-select --install`
 We do this by setting a couple of options in a file found in your home
 directory.
 
-```bash
+```
 $ git config --global user.name "Firstname Lastname"
 $ git config --global user.email username@company.extension
 ```
@@ -49,13 +49,13 @@ easy to keep track of who did what.
 
 You might also want to change the default editor used by Git. For GNU nano
 
-```bash
+```
 $ git config --global core.editor nano
 ```
 
 Make sure everything was entered correctly by typing `git config --list`
 
-```bash
+```
 user.name=<name>
 user.email=<email>
 core.editor=<editor>

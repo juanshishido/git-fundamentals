@@ -6,7 +6,7 @@ Okay, we have Git ready to go. Now, let's try using it!
 
 Let's start by making a new directory called `temp` and navigating to it.
 
-```bash
+```
 $ mkdir temp
 $ cd temp
 ```
@@ -14,14 +14,14 @@ $ cd temp
 To have Git start tracking what we're up to&mdash;that is, to initialize the
 directory as a Git repository&mdash;do the following. 
 
-```bash
+```
 $ git init
 ```
 
 If you look in your directory, showing all files using `ls -a`, you'll see that
 there is something called `.git`.
 
-```bash
+```
 .    ..   .git
 ```
 
@@ -30,13 +30,13 @@ there is something called `.git`.
 Cool! But this still isn't doing anything for us because this directory is
 empty. So, let's create a file in our new directory and add some text to it.
 
-```bash
+```
 $ echo "Data-intensive social science for all." > dlab.txt
 ```
 
 To see the current state of the files in the repository
 
-```bash
+```
 $ git status
 On branch master
 
@@ -56,14 +56,14 @@ will only keep track of the files you tell it to.
 
 Let's start tracking `dlab.txt`.
 
-```bash
+```
 $ git add dlab.txt
 ```
 
 Now, when we run `git status`, Git tells us that we've told it to keep track of
 a new file. We call this being "staged."
 
-```bash
+```
 On branch master
 
 Initial commit
@@ -77,7 +77,7 @@ Changes to be committed:
 
 If this was a mistake, correct with the following
 
-```bash
+```
 $ git rm --cached dlab.txt
 ```
 
@@ -87,13 +87,13 @@ It's a good idea to add a `README.md` file to our directory so that we, and the
 individuals who will collaborate with us, know the purpose of the project. For
 now, we'll create the file but won't add anything to it.
 
-```bash
+```
 $ touch README.md
 ```
 
 Let's take a look at the current state of the directory.
 
-```bash
+```
 $ git status
 On branch master
 
@@ -116,14 +116,14 @@ Untracked files:
 Now we're ready to `commit` this file. Committing changes means making a
 permanent record of the *current state* of your repository.
 
-```bash
+```
 $ git commit
 ```
 
 This will open your text editor and expect you to enter a message. You'll see
 something like this:
 
-```bash
+```
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
@@ -157,7 +157,7 @@ people's commit messages.
 
 Let's write "D-Lab motto" for this commit.
 
-```bash
+```
 [master (root-commit) 7dab427] D-Lab motto
  1 file changed, 1 insertion(+)
  create mode 100644 dlab.txt
@@ -166,7 +166,7 @@ Let's write "D-Lab motto" for this commit.
 If you don't want your to have to use your text editor every time you make a
 commit, you can use `-m`.
 
-```bash
+```
 $ git commit -m "D-Lab motto"
 ```
 
@@ -182,7 +182,7 @@ In a repository, a file can exist in one of four states:
 We've already seen that `README.md` is untracked. Let's update `dlab.txt` and
 then run `git status` again.
 
-```bash
+```
 $ echo "350 Barrows Hall" >> dlab.txt
 $ git status
 On branch master
@@ -202,7 +202,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 We can see that `dlab.txt` has been modified. To see what changed
 
-```bash
+```
 $ git diff dlab.txt
 diff --git a/dlab.txt b/dlab.txt
 index 52277fd..1f82a5f 100644
@@ -215,7 +215,7 @@ index 52277fd..1f82a5f 100644
 
 Since we know we'd like to stage (`add`) and commit this file, we can use
 
-```bash
+```
 $ git commit -am "Added D-Lab's location"
 [master f1446ab] Added D-Lab's location
  1 file changed, 1 insertion(+)
@@ -229,7 +229,7 @@ or deleted.
 What if you have just put a bunch of files in your repo, that you want to add
 all at once?
 
-```bash
+```
 touch LICENSE CITATION script.R magic.py
 ```
 
@@ -244,14 +244,14 @@ files
 
 Luckily, Git has a workaround for this called `.gitignore`.
 
-```bash
+```
 $ echo "# Comment explaining what I'm ignoring
 *.log" > .gitignore
 ```
 
 Now, if we make a log file and try to add and commit with `-A`
 
-```bash
+```
 $ touch test.log
 $ git add -A
 $ git status
