@@ -1,38 +1,32 @@
----
-title: Git FUN!damentals
-subtitle: Remote workflows
-minutes:
----
-
 ## The Origin
 
-While git is useful to use locally, it is invaluable when there are lots of people contributing to the same project. Generally, when there are lots of people working on the same thing, it is good to have one authoritative source of the thing. In git, this is called the origin (but it could also be called dinosaur or banana, if you like). This origin is usually not in *YOUR* local filesystem (i.e. not in your home directory), but in a place where everyone can read from it, even if they can't write to it.
+While Git is useful to use locally, it is invaluable when there are lots of
+people contributing to the same project. Generally, when there are lots of
+people working on the same thing, it is good to have one authoritative source
+of that thing. For this, we introduce the concept of a **remote** repository.
+In Git, the default name for this is `origin`. This is typically not in your
+local filesystem, though it can be. Rather, it's in a place where all of the
+collaborators can read from it, even if they can't write to it.
 
-When you `clone` a repo, git automatically adds the source you cloned from as the remote origin. You can check this for yourself with:
+## Cloning
 
-~~~{.input}
-git remote -v
-~~~
+When you `clone` a repository, Git automatically adds the source you cloned
+from as the remote origin. Let's try.
 
-And you should see an output that looks something like this:
+```
+$ git clone https://github.com/juanshishido/git-fundamentals.git
+$ git remote -v
+origin  https://github.com/juanshishido/git-fundamentals.git (fetch)
+origin  https://github.com/juanshishido/git-fundamentals.git (push)
+```
 
-~~~{.output}
-origin	git@github.com:deniederhut/git-fundamentals.git (fetch)
-origin	git@github.com:deniederhut/git-fundamentals.git (push)
-~~~
+You can get information about that remote with
 
-You can get information about that remote with:
-
-~~~{.input}
-git remote show origin
-~~~
-
-Which, for me, yields this:
-
-~~~{.output}
+```
+$ git remote show origin
 * remote origin
-  Fetch URL: git@github.com:deniederhut/git-fundamentals.git
-  Push  URL: git@github.com:deniederhut/git-fundamentals.git
+  Fetch URL: https://github.com/juanshishido/git-fundamentals.git
+  Push  URL: https://github.com/juanshishido/git-fundamentals.git
   HEAD branch: master
   Remote branches:
     gh-pages tracked
@@ -40,93 +34,96 @@ Which, for me, yields this:
   Local branch configured for 'git pull':
     master merges with remote master
   Local ref configured for 'git push':
-    master pushes to master (fast-forwardable)
-~~~
+    master pushes to master (up to date)
+```
 
-You can add your own remotes to a project with `git remote add <alias> <url>`. For example, if we wanted to add our home directory as a remote for this repo, we could type:
+You can make changes to that repository, locally. However, unless you have
+write permissions, you won't be able to push your changes to the remote. If you
+tried, you might get something like
 
-~~~{.input}
-git init ../test
-git remote add test ../test
-~~~
-
-And now when we run `git remote -v`, we see:
-
-~~~{.output}
-test	/home/oski/test/.git (fetch)
-test	/home/oski/test/.git (push)
-origin	git@github.com:deniederhut/git-fundamentals.git (fetch)
-origin	git@github.com:deniederhut/git-fundamentals.git (push)
-~~~
-
-This is useful if you have already initialized a git repository in your local directory that you want to live at a URL or server where other people are able to access it. To send our data to that remote, we'll `push` it. Try typing:
-
-~~~{.input}
-git push
-~~~
-
-What happens? If you're like me, you see:
-
-~~~{.output}
+```
 remote: Invalid username or password.
-fatal: Authentication failed for 'https://github.com/deniederhut/git-fundmantals.git/'
-~~~
+fatal: Authentication failed for 'https://github.com/juanshishido/git-fundamentals.git'
+```
 
-This is because if you don't specify the remote, git assumes that you mean `origin` (just like BASH assumes you mean `pwd`), and you don't have write access to my repository. 
+If you'd like to contribute to a project that you're not explicitly a part
+of&mdash;that is, that you don't have write access to&mdash;you would *fork*
+that repository.
 
-The general, best-practices workflow with a remotely hosted git repository looksl ike this:
+## GitHub
 
-1. Fetch
-2. Merge (we'll talk about this in two bits)
-3. Branch (we'll talk about this in a bit)
-4. Modify
-5. Commit
-6. Merge 
-7. Push
+**Enter the OctoCat**
 
-`Fetch` means to retrieve data from a remote. `Push` means to send data to a remote. Usually, when you retrieve data from a remote, you let git retrieve the data and merge it into your local data automatically - this is done with the `pull` command, like:
+[Here's lookin' at you, cat](https://octodex.github.com/images/privateinvestocat.jpg)
 
-~~~{.input}
-git pull origin
-~~~
+### Your first GitHub account
 
-After you have modified and commited your changes, you send the changes to the remote with:
+* Go to [https://github.com/join](https://github.com/join)
+* Follow instructions!
+* A free/student account is fine
+* You'll want to use the same email address that you used for git locally
+* Choose a strong password!
 
-~~~{.input}
-git push
-~~~
+![But not this one](http://imgs.xkcd.com/comics/password_strength.png)
 
-Since we haven't specified which remote, git assumes the origin, but sends us a fussy message:
+### Creating repos on GitHub
 
-~~~{.output}
-warning: push.default is unset; its implicit value is changing in
-Git 2.0 from 'matching' to 'simple'. To squelch this message
-and maintain the current behavior after the default changes, use:
+1. Go to your homepage
+2. Press the `+` in the upper righthand corner
+3. Select repository
 
-  git config --global push.default matching
+GitHub initializes your repo for you, and can also create a LICENSE, README,
+and .gitignore with common non-comitted files.
 
-To squelch this message and adopt the new behavior now, use:
+Let's create one for the work we've done on `temp`. Note: the remote GitHub
+repository name *does not* have to match the name of your local version.
 
-  git config --global push.default simple
+## Adding remotes
 
-When push.default is set to 'matching', git will push local branches
-to the remote branches that already exist with the same name.
+With `temp`, we first created the repository locally. We can add remoted to a
+repository with `git remote add <alias> <url>`.
 
-In Git 2.0, Git will default to the more conservative 'simple'
-behavior, which only pushes the current branch to the corresponding
-remote branch that 'git pull' uses to update the current branch.
+Now that you've created your remote repository on GitHub, let's add the remote
+to our project. On the righthand side of your repository page, you'll see
+"**HTTP** clone URL"&mdash;copy this. This is what you should use as the URL
+in the command, below.
 
-See 'git help config' and search for 'push.default' for further information.
-(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode
-'current' instead of 'simple' if you sometimes use older versions of Git)
+```
+$ git remote add origin <url>
+$ git remote -v
+```
 
-Counting objects: 7, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (4/4), 477 bytes | 0 bytes/s, done.
-Total 4 (delta 3), reused 0 (delta 0)
-To git@github.com:dlab-berkeley/cornerstone-2015-unix-FUNdamentals.git
-   0022eb6..fef3ee5  master -> master
-~~~
+## Pull and Push
 
-It is very important to fetch and merge changes before you start modifying files, because files modified in serial can be merged automatically, but files modified in parallel often require human intervention (more on this later).
+Now that you've added the remote, you'll want it to reflect the current state
+of your repository.
+
+```
+$ git push origin master
+```
+
+By default, the main "branch" in any repository&mdash;remote or local&mdash;is
+called "master." Now, if you look at your remote on GitHub, you'll see that it
+reflects the current state&mdash;that is, it's up-to-date with 'origin/master'.
+
+Now, let's edit `README.md`. Add whatever text you'd like. Remember that it's
+currently not being tracked. Let's add it and commit. After you've edited the
+file
+
+```
+$ git add README.md
+$ git commit -m "<message>"
+$ git push origin master
+```
+
+The nice thing about GitHub is that is takes the information in `README.md` and
+renders and displays it on your repository page.
+
+Whenever your collaborators make changes, you'll want to "pull" the changes
+they've made to their files.
+
+```
+$ git pull origin master
+```
+
+It is very important to pull changes before you start modifying files.
