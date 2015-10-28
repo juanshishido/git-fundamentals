@@ -277,4 +277,5 @@ This learning module borrows and adapts materials from the following
 organizations and individuals. Thank you!
 
 [Software Carpentry](https://github.com/swcarpentry/git-novice)
+
 [Dav Clark](https://github.com/davclark/git-fundamentals)
